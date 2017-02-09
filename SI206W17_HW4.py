@@ -14,8 +14,19 @@ from bs4 import BeautifulSoup
 
 ## Write the Python code to do so here.
 
+cache_filename = "html_data_from_nytimes_data.html"
+try:
+  f = open(cache_filename,'r')  
+  text_data_from_site = f.read() 
+  f.close()
+except:
+  r = requests.get("http://www.nytimes.com")
+  text_data_from_site = r.text 
+  f = open(cache_filename,"w") 
+  f.write(text_data_from_site)
+  f.close()
 
-
+soup = BeautifulSoup(text_data_from_site, 'html.parser')
 
 #####################
 
